@@ -18,6 +18,7 @@ export class Server {
     app.use(bodyParser.urlencoded({
       extended: true
     }))
+    app.use(bodyParser.json());
     new Router({app})
     
     app.listen(PORT)

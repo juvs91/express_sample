@@ -7,7 +7,7 @@ export class Router {
     return Object.assign({}, req.body, req.params, req.query)
   }
   init () {
-    this.app.get('tasks', (req, res, next) => {
+    this.app.get('/tasks', (req, res, next) => {
       try {
         let params = this.processParams(req)
         res.send({
@@ -18,7 +18,7 @@ export class Router {
         next(err)
       }
     })
-    this.app.get('tasks/:id', (req, res, next) => {
+    this.app.get('/tasks/:id', (req, res, next) => {
       try {
         let params = this.processParams(req)
         res.send({
@@ -29,7 +29,7 @@ export class Router {
         next(err)
       }
     })
-    this.app.post('tasks', (req, res, next) => {
+    this.app.post('/tasks', (req, res, next) => {
       try {
         let params = this.processParams(req)
         res.send({
@@ -40,7 +40,7 @@ export class Router {
         next(err)
       }
     })
-    this.app.put('tasks/:id', (req, res, next) => {
+    this.app.put('/tasks/:id', (req, res, next) => {
       try {
         let params = this.processParams(req)
         res.send({
@@ -51,7 +51,7 @@ export class Router {
         next(err)
       }
     })
-    this.app.patch('tasks/:id', (req, res, next) => {
+    this.app.patch('/tasks/:id', (req, res, next) => {
       try {
         let params = this.processParams(req)
         res.send({
@@ -62,7 +62,7 @@ export class Router {
         next(err)
       }
     })
-    this.app.delete('tasks/:id', (req, res, next) => {
+    this.app.delete('/tasks/:id', (req, res, next) => {
       try {
         let params = this.processParams(req)
         res.send({

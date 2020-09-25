@@ -1,7 +1,11 @@
-export class Router {
-  constructor({app}) {
+import AbstractRouter from "./abstract_router.js"
+
+export default class TaskRouter extends AbstractRouter{
+  constructor({app, task_controller}) {
+    super()
     this.app = app // Type express
     this.init() // on construction add all route functions
+    this.task_controller = task_controller
   }
   processParams (req) {
     return Object.assign({}, req.body, req.params, req.query)
@@ -10,9 +14,9 @@ export class Router {
     this.app.get('/tasks', (req, res, next) => {
       try {
         let params = this.processParams(req)
-        res.send({
-          message: "task sent in get all",
-          params
+        this.task_controller.getAll(params)
+        .then(tasks => {
+          res.send(tasks)          
         })
       } catch(err) {
         next(err)
@@ -21,9 +25,9 @@ export class Router {
     this.app.get('/tasks/:id', (req, res, next) => {
       try {
         let params = this.processParams(req)
-        res.send({
-          message: "task sent in get single task",
-          params
+        this.task_controller.get(params)
+        .then(task => {
+          res.send(task)          
         })
       } catch(err) {
         next(err)
@@ -32,9 +36,9 @@ export class Router {
     this.app.post('/tasks', (req, res, next) => {
       try {
         let params = this.processParams(req)
-        res.send({
-          message: "create a new task",
-          params
+        this.task_controller.create(params)
+        .then(task => {
+          res.send(task)          
         })
       } catch(err) {
         next(err)
@@ -43,9 +47,9 @@ export class Router {
     this.app.put('/tasks/:id', (req, res, next) => {
       try {
         let params = this.processParams(req)
-        res.send({
-          message: "update a single task with all new data",
-          params
+        this.task_controller.update(params)
+        .then(task => {
+          res.send(task)          
         })
       } catch(err) {
         next(err)
@@ -54,9 +58,9 @@ export class Router {
     this.app.patch('/tasks/:id', (req, res, next) => {
       try {
         let params = this.processParams(req)
-        res.send({
-          message: "update a single task with the sent data",
-          params
+        this.task_controller.update(params)
+        .then(task => {
+          res.send(task)          
         })
       } catch(err) {
         next(err)
@@ -65,9 +69,9 @@ export class Router {
     this.app.delete('/tasks/:id', (req, res, next) => {
       try {
         let params = this.processParams(req)
-        res.send({
-          message: "delete the task",
-          params
+        this.task_controller.delete(params)
+        .then(task => {
+          res.send(task)          
         })
       } catch(err) {
         next(err)

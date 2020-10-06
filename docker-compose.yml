@@ -9,7 +9,7 @@ services:
       - ./mongo_common.env
     ports:
       - "27017:27017"
-    command: mongod --wiredTigerCacheSizeGB 2.0
+    # command: mongod --wiredTigerCacheSizeGB 2.0
     networks:
       sample-network:
 

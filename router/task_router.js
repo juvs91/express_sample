@@ -4,8 +4,8 @@ export default class TaskRouter extends AbstractRouter{
   constructor({app, task_controller}) {
     super()
     this.app = app // Type express
-    this.init() // on construction add all route functions
     this.task_controller = task_controller
+    this.init() // on construction add all route functions
   }
   processParams (req) {
     return Object.assign({}, req.body, req.params, req.query)

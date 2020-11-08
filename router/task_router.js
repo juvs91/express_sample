@@ -1,17 +1,18 @@
 import AbstractRouter from "./abstract_router.js"
 
 export default class TaskRouter extends AbstractRouter{
-  constructor({app, task_controller}) {
+  constructor({app, task_controller, auth}) {
     super()
     this.app = app // Type express
     this.task_controller = task_controller
+    this.auth = auth
     this.init() // on construction add all route functions
   }
   processParams (req) {
     return Object.assign({}, req.body, req.params, req.query)
   }
   init () {
-    this.app.get('/tasks', (req, res, next) => {
+    this.app.get('/tasks', this.auth, (req, res, next) => {
       try {
         let params = this.processParams(req)
         this.task_controller.getAll(params)

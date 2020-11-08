@@ -28,14 +28,19 @@ export class Server {
     app.use(bodyParser.urlencoded({
       extended: true
     }))
+    // app.use((req, res, next) => {
+    //   console.log("in the middleware")
+    //   next()
+    // })
     app.use(bodyParser.json());
-    app.use(jwtAuth)
+    // app.use(jwtAuth)
     // all the routers can be build inside the router module with a builder or factory, more like builder
     // and can be pass here thru the contructor specially the TaskController for dependency inversion
     let router = new RouterInit([
       new TaskRouter({
         app, 
-        task_controller: new TaskController(data_source)
+        task_controller: new TaskController(data_source),
+        auth: jwtAuth
       }),
       new UserRouter({
         app,
